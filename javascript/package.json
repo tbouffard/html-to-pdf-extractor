@@ -6,6 +6,7 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "pdf-merger-js": "~5.0.0",
     "playwright-chromium": "~1.40.1"
   }
 }
