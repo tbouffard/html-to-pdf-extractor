@@ -6,13 +6,12 @@ fs.rmSync(outputDirectory, {recursive: true, force: true});
 fs.mkdirSync(outputDirectory, {recursive: true});
 
 
-const urls = [
-  'https://playwright.dev/docs/api/class-page#page-pdf',
-  'https://github.com/tbouffard/html-to-pdf-extractor',
-]
-
-
 (async () => {
+  const urls = [
+    'https://playwright.dev/docs/api/class-page#page-pdf',
+    'https://github.com/tbouffard/html-to-pdf-extractor',
+  ]
+
   const browser = await chromium.launch({headless: false});
   const page = await browser.newPage();
 
@@ -29,7 +28,7 @@ const urls = [
     // Generates a PDF with 'screen' media type.
     // https://playwright.dev/docs/api/class-page#page-pdf
     await page.emulateMedia({media: 'screen'});
-    await page.pdf({path: `${outputDirectory}/${fileName}.pdf`});
+    await page.pdf({path: `${outputDirectory}/${fileName}.pdf`, format: 'A4'});
 
     console.info(`PDF generated for ${fileName}`);
   }
