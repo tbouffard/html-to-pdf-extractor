@@ -35,7 +35,8 @@ fs.mkdirSync(outputDirectory, {recursive: true});
     // Generates a PDF with 'screen' media type.
     // https://playwright.dev/docs/api/class-page#page-pdf
     await page.emulateMedia({media: 'screen'});
-    await page.pdf({path: `${outputDirectory}/${fileName}.pdf`, format: 'A4'});
+    await page.pdf({path: `${outputDirectory}/${fileName}.pdf`, height: '42cm', width: '29.7cm'});
+    // await page.pdf({path: `${outputDirectory}/${fileName}.pdf`, format: 'A4'});
 
     console.info(`PDF generated for ${fileName}`);
   }
