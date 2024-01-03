@@ -7,7 +7,8 @@ fs.mkdirSync(outputDirectory, {recursive: true});
 
 
 const urls = [
-  'https://playwright.dev/docs/api/class-page#page-pdf'
+  'https://playwright.dev/docs/api/class-page#page-pdf',
+  'https://github.com/tbouffard/html-to-pdf-extractor',
 ]
 
 
@@ -15,9 +16,11 @@ const urls = [
   const browser = await chromium.launch({headless: false});
   const page = await browser.newPage();
 
-  for (const url of urls) {
+  for (let counter = 0; counter < urls.length; counter++) {
+    const url = urls[counter];
+
     console.info('Processing URL', url);
-    const fileName = "url1";
+    const fileName = `code-${counter}`;
 
     await page.goto(`${url}`); // and wait for the load event
 
