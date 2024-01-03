@@ -7,10 +7,17 @@ fs.mkdirSync(outputDirectory, {recursive: true});
 
 
 (async () => {
-  const urls = [
-    'https://playwright.dev/docs/api/class-page#page-pdf',
-    'https://github.com/tbouffard/html-to-pdf-extractor',
-  ]
+  // Read the file and print its contents.
+  const dataFilePath = 'data/urls.txt';
+  console.info('Getting URLs from', dataFilePath);
+  const data = fs.readFileSync(dataFilePath, 'utf8');
+  const urls = data.toString().split('\n').filter(Boolean)
+
+  // const urls = [
+  //   'https://playwright.dev/docs/api/class-page#page-pdf',
+  //   'https://github.com/tbouffard/html-to-pdf-extractor',
+  // ]
+  console.info(`Found ${urls.length} URLs`);
 
   const browser = await chromium.launch({headless: false});
   const page = await browser.newPage();
@@ -18,7 +25,7 @@ fs.mkdirSync(outputDirectory, {recursive: true});
   for (let counter = 0; counter < urls.length; counter++) {
     const url = urls[counter];
 
-    console.info('Processing URL', url);
+    console.info('Processing', url);
     const fileName = `code-${counter}`;
 
     await page.goto(`${url}`); // and wait for the load event
