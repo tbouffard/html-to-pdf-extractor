@@ -28,14 +28,17 @@ async function saveContentsAsPdf() {
   const browser = await chromium.launch({headless: browserHeadless});
   const page = await browser.newPage();
 
+  const maxNumber = urls.length - 1;
+  const paddingLength = `${maxNumber}`.length;
+
   for (let counter = 0; counter < urls.length; counter++) {
     const url = urls[counter];
 
     console.info('Processing', url);
-    const fileName = `file-${counter}`;
+    const paddedCounter = `${counter}`.padStart(paddingLength, '0');
+    const fileName = `file-${paddedCounter}`;
 
     await page.goto(`${url}`); // and wait for the load event
-
     console.info('Page loaded');
 
     // Generates a PDF with 'screen' media type.
@@ -58,6 +61,7 @@ const mergePdfs = async () => {
   // TODO use await and async functions
   const files = fs.readdirSync(urlsOutputDirectory);
   console.info(`Merging ${files.length} files`)
+  files.forEach(file => console.info(file));
 
   const merger = new PDFMerger();
   for (const fileName of files) {
