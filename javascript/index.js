@@ -23,11 +23,6 @@ async function saveContentsAsPdf() {
   // TODO use await and async functions
   const data = fs.readFileSync(dataFilePath, 'utf8');
   const urls = data.toString().split('\n').filter(Boolean)
-
-  // const urls = [
-  //   'https://playwright.dev/docs/api/class-page#page-pdf',
-  //   'https://github.com/tbouffard/html-to-pdf-extractor',
-  // ]
   console.info(`Found ${urls.length} URLs`);
 
   const browser = await chromium.launch({headless: browserHeadless});
