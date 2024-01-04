@@ -61,7 +61,6 @@ const mergePdfs = async () => {
   // TODO use await and async functions
   const files = fs.readdirSync(urlsOutputDirectory);
   console.info(`Merging ${files.length} files`)
-  files.forEach(file => console.info(file));
 
   const merger = new PDFMerger();
   for (const fileName of files) {
